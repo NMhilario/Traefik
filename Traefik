@@ -44,7 +44,7 @@ providers:
 certificatesResolvers:
   cloudflare:
     acme:
-      email: you@example.com
+      email: <CloudFlare Email>
       storage: acme.json
       dnsChallenge:
         provider: cloudflare
@@ -59,7 +59,7 @@ http:
     pihole:
       entryPoints:
         - "https"
-      rule: "Host(`pihole.local.example.com`)"
+      rule: "Host(`pihole.<DOMAIN>`)"
       middlewares:
         - default-headers
         - addprefix-pihole
@@ -68,7 +68,7 @@ http:
     plex:
       entryPoints:
         - "https"
-      rule: "Host(`plex.local.example.com`)"
+      rule: "Host(`plex.<DOMAIN>`)"
       middlewares:
         - default-headers
       tls: {}
@@ -76,7 +76,7 @@ http:
     rancher:
       entryPoints:
         - "https"
-      rule: "Host(`rancher.local.example.com`)"
+      rule: "Host(`rancher.<DOMAIN>`)"
       middlewares:
         - default-headers
       tls: {}
@@ -86,17 +86,17 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: "http://192.168.0.101:80"
+          - url: "http://<IP ADDRESS>:80"
         passHostHeader: true
     plex:
       loadBalancer:
         servers:
-          - url: "https://192.168.0.105:32400"
+          - url: "https://<IP ADDRESS>:32400"
         passHostHeader: true
     rancher:
       loadBalancer:
         servers:
-          - url: "https://192.168.0.107"
+          - url: "https://<IP ADDRESS>"
         passHostHeader: true
 
   middlewares:
@@ -124,9 +124,8 @@ http:
     default-whitelist:
       ipWhiteList:
         sourceRange:
-        - "10.0.0.0/8"
-        - "192.168.0.0/16"
-        - "172.16.0.0/12"
+        - "IP ADDRESS RANGE"
+	- "..."
 
     secured:
       chain:
@@ -137,6 +136,3 @@ http:
 [CREATE DOCKER PROXY NETWORK]
 
 docker network create proxy
-
-docker-compose up -d
-docker-compose up -d --force-recreate
