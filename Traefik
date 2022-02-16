@@ -10,15 +10,8 @@ chmod 600 acme.json
 touch traefik.yml
 touch config.yml
 
-~/
-	traefik
-	- docker-compose.yml file
-		data
-		- config.yml file
-		- acme.json file
-		- traefik.yml file
-
 sudo apt update
+
 sudo apt install apache2-utils
 echo $(htpasswd -nb <USER> <PASSWORD>) | sed -e s/\\$/\\$\\$/g
 	- Paste output in docker-compose.yml in line (traefik.http.middlewares.traefik-auth.basicauth.users=<USER>:<HASHED-PASSWORD>)
